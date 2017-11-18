@@ -1,0 +1,18 @@
+body {
+    background: #dddddd;
+}
+
+#inputs {
+    margin: 10px;
+    text-align: center;
+}
+
+#textField {
+    min-width: 600px;
+}
+
+#messages {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
