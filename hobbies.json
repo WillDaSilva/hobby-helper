@@ -1,0 +1,206 @@
+{
+    "Cheesemaking": [
+        "cheesemaking"
+    ],
+    "Homebrewing": [
+        "homebrewing",
+        "cider",
+        "mead",
+        "firewater",
+        "thebrewery",
+        "winemaking"
+    ],
+    "Astronomy": [
+        "astronomy",
+        "astrophotography"
+    ],
+    "Photography": [
+        "photography",
+        "astrophotography",
+        "askphotography",
+        "postproduction"
+    ],
+    "Creating Music": [
+        "learnmusic",
+        "singing",
+        "guitar",
+        "wearethemusicmakers",
+        "musictheory",
+        "vsti",
+        "musicology",
+        "composer"
+    ],
+    "Language Learning": [
+        "languagelearning",
+        "totalanguage",
+        "languageexchange"
+    ],
+    "Fabric Work": [
+        "quilting",
+        "bleachshirts",
+        "sewing",
+        "sewhelp",
+        "crochet",
+        "knitting",
+        "loomknitting",
+        "geeknitting",
+        "stitchy",
+        "crossstitch",
+        "bobbinlace",
+        "tatting"
+    ],
+    "Gardening": [
+        "gardening",
+        "indoorgarden",
+        "botany",
+        "farming",
+        "aquaponics"
+    ],
+    "Cooking": [
+        "cooking",
+        "food",
+        "recipes",
+        "52weeksofcooking",
+        "canning"
+    ],
+    "Baking": [
+        "baking",
+        "breadit"
+    ],
+    "Juggling and Juggling Related Hobbies": [
+        "juggling",
+        "diabolo",
+        "throwers",
+        "penspinning",
+        "firespin",
+        "kendama"
+    ],
+    "Pottery and Clay": [
+        "pottery",
+        "polymerclay"
+    ],
+    "Jewellery and Jewellery Making": [
+        "jewelry",
+        "wirewrapping",
+        "braceletcrafting"
+    ],
+    "Papercraft": [
+        "papercraft",
+        "oragami"
+    ],
+    "Scrapbooking": [
+        "scrapbooking"
+    ],
+    "Visual Arts": [
+        "art",
+        "painting",
+        "drawing",
+        "happytrees",
+        "pixelart",
+        "zentangle"
+    ],
+    "Fish Keeping": [
+        "fishtank",
+        "aquaponics",
+        "aquariums",
+        "jarrariums",
+        "nanotank"
+    ],
+    "Archery": [
+        "archery"
+    ],
+    "Woodworking": [
+        "woodworking",
+        "homeimprovement"
+    ],
+    "Watchmaking": [
+        "watchmaking"
+    ],
+    "Blacksmithing": [
+        "blacksmith",
+        "metalworking"
+    ],
+    "DIY & Crafts": [
+        "diy",
+        "craft",
+        "diy_tech",
+        "homeimprovement"
+    ],
+    "Fishing": [
+        "fishing",
+        "flyfishing"
+    ],
+    "Computer Building": [
+        "buildapc",
+        "diy_tech",
+        "pcmasterrace"
+    ],
+    "Programming": [
+        "programmerhumor",
+        "learnprogramming",
+        "coding",
+        "programming",
+        "programmertil",
+        "askprogramming",
+        "compsci",
+        "dailyprogrammer",
+        "webdev",
+        "gamedev"
+    ],
+    "Reading": [
+        "books",
+        "suggestmeabook",
+        "bookclub",
+        "52book"
+    ],
+    "Hunting": [
+        "hunting",
+        "waterfowl"
+    ],
+    "Outdoors": [
+        "fishing",
+        "outdoors",
+        "camping",
+        "hiking",
+        "geocaching"
+    ],
+    "Socializing": [
+        "penpals",
+        "makenewfriendshere"
+    ],
+    "Board Games": [
+        "boardgames",
+        "hearthstone",
+        "magictcg",
+        "dnd",
+        "chess"
+    ],
+    "Writing": [
+        "writing",
+        "screenwriting",
+        "poetry",
+        "freewrite",
+        "creativewriting",
+        "writingprompts"
+    ],
+    "Lockpicking": [
+        "lockpicking"
+    ],
+    "Film": [
+        "truefilm",
+        "movies",
+        "netflixbestof"
+    ],
+    "Electronics": [
+        "arduino",
+        "raspberry_pi",
+        "electronics",
+        "askelectronics"
+    ],
+    "Exercising": [
+        "exercise",
+        "yoga",
+        "crossfit",
+        "weightlifting"
+    ]
+}
