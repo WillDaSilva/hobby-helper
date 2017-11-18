@@ -4,7 +4,8 @@ import re
 import os
 import json
 
-reObj = re.compile(r"[^\s\w+'\\n]")
+reObj1 = re.compile(r'[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)')
+reObj2 = re.compile(r"(?:\n|[^\w\s])+")
 processed = set() # lines which have been processed
 
 def split_by_first_letter_in_username(inFile, outFile, letter):
@@ -20,7 +21,8 @@ def split_by_first_letter_in_username(inFile, outFile, letter):
             continue
         else:
             processed.add(i)
-        userObj['body'] = re.sub(reObj, ' ', userObj['body'])
+        userObj['body'] = re.sub(reObj1, ' ', userObj['body'])
+        userObj['body'] = re.sub(reObj2, ' ', userObj['body'])
         if username in users:
             if userObj['subreddit'] not in users[username]['s']:
                 users[username]['s'].append(userObj['subreddit'])
