@@ -11,13 +11,11 @@ processed = set() # lines which have been processed
 def split_by_first_letter_in_username(inFile, outFile, letter):
     users = dict()
     for i, comment in enumerate(inFile):
-        if i > 500:
-            break
         if i in processed:
             continue
         userObj = json.loads(comment)
         username = userObj['author']
-        if username.lower()[0] != letter:
+        if username[0].lower() != letter and letter != '_':
             continue
         else:
             processed.add(i)
@@ -38,7 +36,7 @@ def split_by_first_letter_in_username(inFile, outFile, letter):
 year = '2015'
 fullpath = '/media/media/reddit-comments-dataset/reddit_data/{}/'.format(year)
 with open(os.path.join(fullpath, 'RC_{}_trimmed'.format(year)), 'r') as inFile:
-    for letter in 'abc':#'abcdefghijklmnopqrstuvwxyz':
+    for letter in 'abcdefghijklmnopqrstuvwxyz_':
         with open(os.path.join(os.path.join(fullpath, 'usernames_by_letter'), letter), 'w') as outFile:
             split_by_first_letter_in_username(inFile, outFile, letter)
         inFile.seek(0)
