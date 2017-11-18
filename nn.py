@@ -14,7 +14,7 @@ data_dir = os.path.join(dir_path, 'data')
 # Network Parameters
 n_input = 200 # Size of a user vector
 n_hidden = 50 #
-n_out = 50 # number of hobbies
+n_out = 35 # number of hobbies
 
 
 def main(_):
