@@ -31,6 +31,11 @@ def next_batch(batch_size, data, labels):
 
     return np.asarray(data_shuffled), np.asarray(labels_shuffled)
 
+with open('hobbies.json', 'r') as hobFile:
+            hob = json.load(hobFile)
+            hob = list(sorted(hob.keys()))
+            n_out = len(hob)
+
 def hobbyToVector(hobbies):
     ones = []
     for hobby in hobbies:
@@ -42,11 +47,6 @@ def main(_):
     with open('vectorsAndLabels.json', 'r') as vl:
         wordVectors = np.asarray([np.asarray(x) for x in json.loads(vl.readline())])
         hobbies = np.asarray([hobbyToVector(x) for x in json.loads(vl.readline())])
-
-    with open('hobbies.json', 'r') as hobFile:
-            hob = json.load(hobFile)
-            hob = list(sorted(hob.keys()))
-            n_out = len(hob)
 
     global_step = tf.Variable(0, name='global_step', trainable=False)
 
