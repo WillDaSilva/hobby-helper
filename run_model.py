@@ -52,7 +52,7 @@ def main(_):
     def hobbify(vector):
         print(sess.run(y_, feed_dict={x: np.asarray(vector)}))
         print(y_)
-    hobbify([0.5 for x in range(200)])
+    hobbify([[0.5 for x in range(200)]])
 
 if __name__ == '__main__':
         tf.app.run(main=main)
