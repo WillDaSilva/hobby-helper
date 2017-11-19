@@ -23,7 +23,7 @@ class LabeledLineSentence(object):
                 inData = json.load(inFile)
             for i, userdata in enumerate(inData.values()):
                 self.sentences.append(LabeledSentence(utils.to_unicode(userdata['c']).split(), [prefix + '_%s' % i]))
-                self.labels[prefix + '_%s' % i] = it.chain.from_iterable([reversed_hobbies[s] for s in userdata['s']])
+                self.labels[prefix + '_%s' % i] = list(it.chain.from_iterable([reversed_hobbies[s] for s in userdata['s']]))
         return self.sentences
 
     def sentences_perm(self):
@@ -41,16 +41,20 @@ model.build_vocab(sentences.to_array())
 
 print('Starting training')
 model.train(sentences.sentences_perm(), total_examples=model.corpus_count, epochs=20)
+
 print('Done training. Saving model')
 model.save_word2vec_format('redditmodel.d2v', doctag_vec=True, binary=True)
 
 labelArray = []
 vectorArray = []
 
-for key in sentences.labels.keys():
+for key in sentences.labels:
     labelArray.append(sentences.labels[key])
-    vectorArray.append(model.docvecs[key])
+    vectorArray.append(model.docvecs[key].tolist())
 
 with open('vectorsAndLabels.json', 'w') as vl:
     vl.write(json.dumps(vectorArray) + '\n')
     vl.write(json.dumps(labelArray) + '\n')
+
+print('Done!')
+
