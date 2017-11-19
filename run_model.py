@@ -1,7 +1,10 @@
 import numpy as np
 import tensorflow as tf
 import os
+import json
 
+with open('hobbies.json') as hobbyFile:
+    hobbies = sorted([x for x in json.load(hobbyFile)])
 
 # Set enviroment variables
 os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
@@ -47,8 +50,8 @@ def main(_):
     saver.restore(sess, 'nn_model.ckpt')
 
     def hobbify(vector):
-        sess.run(y_, feed_dict={x: vector})
-
+        print(sess.run(y_, feed_dict={x: vector}))
+        print(y_)
 
 
 if __name__ == '__main__':
