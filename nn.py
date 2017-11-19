@@ -21,11 +21,12 @@ n_out = 0 # number of hobbies initialized after hob is loaded
 batch_size = 100
 learning_rate = 0.5
 total_batches = 1000
+save_iteration = total_batches // 4
 
-def next_batch(batch_size, data, labels):
+def next_batch(b_size, data, labels):
     idx = np.arange(0,len(data))
     np.random.shuffle(idx)
-    idx = idx[:batchsize]
+    idx = idx[:b_size]
     data_shuffled = [data[i] for i in idx]
     labels_shuffled = [labels[i] for i in idx]
 
@@ -39,7 +40,7 @@ with open('hobbies.json', 'r') as hobFile:
 def hobbyToVector(hobbies):
     ones = []
     for hobby in hobbies:
-        ones.append(hob.indexOf(hobby))
+        ones.append(hob.index(hobby))
     return [0 if x not in ones else 1 for x in range(len(hob))]
 
 def main(_):
@@ -87,13 +88,13 @@ def main(_):
     saver = tf.train.Saver(save_relative_paths=True)
 
     # Train
-    for _ in range(total_batches):
+    for i in range(total_batches):
+        if i % (total_batches // 20) == 0:
+            print(i)
         batch_xs, batch_ys = next_batch(batch_size, wordVectors, hobbies)
         sess.run(train, feed_dict={x: batch_xs, y: batch_ys})
     else:
-        saver.save(sess, 'nn_model', global_step)
+        saver.save(sess, 'nn_model.ckpt') #, global_step)
 
 if __name__ == '__main__':
         tf.app.run(main=main)
-
-

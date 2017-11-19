@@ -44,7 +44,8 @@ def main(_):
     sess = tf.InteractiveSession()
     tf.global_variables_initializer().run()
     saver = tf.train.Saver(save_relative_paths=True)
-    saver.restore(sess,'checkpoint')
+    saver.restore(sess, 'nn_model.ckpt')
+
     def hobbify(vector):
         sess.run(y_, feed_dict={x: vector})
 
