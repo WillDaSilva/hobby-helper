@@ -1,5 +1,7 @@
 import numpy as np
 import tensorflow as tf
+import os
+
 
 # Set enviroment variables
 os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
