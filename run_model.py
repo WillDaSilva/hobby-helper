@@ -50,9 +50,10 @@ def main(_):
     saver.restore(sess, 'nn_model.ckpt')
 
     def hobbify(vector):
-        print(sess.run(y_, feed_dict={x: np.asarray(vector)}))
-        print(y_)
-    hobbify([0.5 for x in range(200)])
+        result = list(sess.run(y_, feed_dict={x: np.asarray(vector)}))[0]
+        print(result)
+        
+    hobbify([[0.5 for x in range(200)]])
 
 if __name__ == '__main__':
         tf.app.run(main=main)
