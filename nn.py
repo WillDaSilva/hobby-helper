@@ -76,8 +76,8 @@ def main(_):
 
     cross_entropy = tf.reduce_mean(
         tf.nn.sigmoid_cross_entropy_with_logits(
-            labels=y,
-            logits=y_
+            labels=y_,
+            logits=y
         )
     )
     train = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
