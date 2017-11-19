@@ -51,7 +51,7 @@ def main(_):
 
     def hobbify(vector):
         result = list(sess.run(y_, feed_dict={x: np.asarray(vector)}))[0]
-        hobbyVectorResult = sorted([(hobbies[i],result[i]) for i in range(len(result))], key=lambda x : x[1])
+        print(hobbyVectorResult = sorted([(hobbies[i],result[i]) for i in range(len(result))], key=lambda x : x[1]))
         
     hobbify([[0.5 for x in range(200)]])
 
