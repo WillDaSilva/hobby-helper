@@ -13,38 +13,67 @@ data_dir = os.path.join(dir_path, 'data')
 
 # Network Parameters
 n_input = 200 # Size of a user vector
-n_hidden = 50 #
+n_hidden_1 = 250 #
+n_hidden_2 = 250 
 n_out = 35 # number of hobbies
 
+batch_size = 100
+learning_rate = 0.5
+total_batches = 1000
+
+def next_batch(batch_size, data, labels):
+  idx = np.arange(0,len(data))
+  np.random.shuffle(idx)
+  idx = idx[:batchsize]
+  data_shuffled = [data[i] for i in idx]
+  labels_shuffled = [labels[i] for i in idx]
+
+  return np.asarray(data_shuffled), np.asarray(labels_shuffled)
 
 def main(_):
   # Import data
-  # Not yet implemented
+  wordVectors = []
+  hobbies = []
 
   # Create the model
   x = tf.placeholder(tf.float32, [None, n_input])
-  W = tf.Variable(tf.zeros([n_input, n_out]))
-  b = tf.Variable(tf.zeros([n_out]))
-  y = tf.matmul(x, W) + b
+  y = tf.placeholder(tf.float32, [None, n_out])
+  
+  w1 = tf.Variable(tf.random_normal([n_input,n_hidden_1], stddev = 0.03), name = 'w1')
+  b1 = tf.Variable(tf.random_normal([n_hidden_1]), name = 'b1')
 
-  # Define loss and optimizer
-  y_ = tf.placeholder(tf.float32, [None, n_out])
+  w2 = tf.Variable(tf.random_normal([n_hidden_1,n_hidden_2], stddev = 0.03), name = 'w2')
+  b2 = tf.Variable(tf.random_normal([n_hidden_2]), name = 'b2')
 
-  cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y))
-  train = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
+  w3 = tf.Variable(tf.random_normal([n_hidden_2,n_out], stddev = 0.03), name = 'w3')
+  b3 = tf.Variable(tf.random_normal([n_out]), name = 'b3')
+
+  hidden_1_out = tf.add(tf.matmul(x,w1),b1)
+  hidden_1_out = tf.nn.sigmoid(hidden_1_out)
+
+  hidden_2_out = tf.add(tf.matmul(hidden_1_out,w2),b2)
+  hidden_2_out = tf.nn.sigmoid(hidden_2_out)
+
+  #Define loss and optimizer
+  
+  y_ = tf.nn.sigmoid(tf.add(tf.matmul(hidden_2_out, w3), b3))
+
+  cross_entropy = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(labels=y, logits=y_))
+  train = tf.train.GradientDescentOptimizer(learning_rate).minimize(cross_entropy)
 
   sess = tf.InteractiveSession()
   tf.global_variables_initializer().run()
   # Train
-  for _ in range(config.training_iters):
-    batch_xs, batch_ys = (None, None) # Not yet implemented
-    sess.run(train, feed_dict={x: batch_xs, y_: batch_ys})
+  for _ in range(total_batches):
+    batch_xs, batch_ys = next_batch(batch_size, wordVectors, hobbies)
+    sess.run(train, feed_dict={x: batch_xs, y: batch_ys})
 
-  # Test trained model
+  '''# Test trained model
   correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
   accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
   print(sess.run(accuracy, feed_dict={x: ,      # user vectors
                                       y_: }))   # hobbies
+                                      '''
 
 if __name__ == '__main__':
     tf.app.run(main=main)

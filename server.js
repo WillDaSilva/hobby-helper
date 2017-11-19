@@ -60,7 +60,24 @@ wss.on('connection', function(ws) { //function runs when a new connection is ope
 								}
 								userString = userString.replace(prepRegex, ' ');
 								userString = userString.toLowerCase();
-								console.log(userString);
+								let commentPostRequest = http.post('', function(vectorResponse){
+									
+									let unparsedVector = '';
+									
+									vectorResponse.on('data', function(chunk){
+										unparsedVector += chunk;
+									});
+									
+									vectorResponse.on('end', function(){
+										let vector = JSON.parse(unparsedVector);
+										
+										if(!vector) return;
+										
+										//Do something with the returned vector
+										
+									});
+									
+								});
 							}
 						});
                     }).on('error', function(e){
