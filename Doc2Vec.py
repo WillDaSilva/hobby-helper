@@ -44,4 +44,15 @@ model.build_vocab(sentences.to_array())
 print('Starting training')
 model.train(sentences.sentences_perm(),total_examples=model.corpus_count,epochs=20)
 print('Done training. Saving model')
-model.save_word2vec_format('redditmodel.d2v', doctag_vec=True, word_vec=True, binary=True)
+model.save_word2vec_format('redditmodel.d2v', doctag_vec=True, binary=True)
+
+labelArray = []
+vectorArray = []
+
+for key in labels.keys():
+	labelArray.append(labels[key]);
+	vectorArray.append(model.docvecs[key])
+
+with open('vectorsAndLabels.json', 'w') as vl:
+	vl.write(json.dumps(vectorArray))
+	vl.write(json.dumps(labelArray))
