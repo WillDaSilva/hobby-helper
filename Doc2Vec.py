@@ -10,6 +10,9 @@ from gensim import utils
 from gensim.models.doc2vec import LabeledSentence
 from gensim.models import Doc2Vec
 
+with open('hobbiesReversed.json', 'r') as reversedHobbiesFile:
+    reversed_hobbies = json.load(reversedHobbiesFile)
+
 class LabeledLineSentence(object):
     def __init__(self, sources):
         self.sources = sources
@@ -21,8 +24,8 @@ class LabeledLineSentence(object):
             with open(source, 'r') as inFile:
                 inData = json.load(inFile)
             for i, userdata in enumerate(inData.values()):
-                self.sentences.append(LabeledSentence(util.to_unicode(userdata['c']).split(), [prefix + '_%s' % i]))
-                self.lables[prefix + '_%s' % i] = it.chain.from_iterable([reversed_hobbies[s] for s in userdata['s']])
+                self.sentences.append(LabeledSentence(utils.to_unicode(userdata['c']).split(), [prefix + '_%s' % i]))
+                self.labels[prefix + '_%s' % i] = it.chain.from_iterable([reversed_hobbies[s] for s in userdata['s']])
         return self.sentences
 
     def sentences_perm(self):
