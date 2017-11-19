@@ -14,8 +14,9 @@ data_dir = os.path.join(dir_path, 'data')
 
 # Network Parameters
 n_input = 200 # Size of a user vector
-n_hidden_1 = 250
-n_hidden_2 = 250
+n_hidden_1 = 300
+n_hidden_2 = 300
+n_hidden_3 = 300
 n_out = 0 # number of hobbies initialized after hob is loaded
 
 batch_size = 100
@@ -61,8 +62,11 @@ def main(_):
     w2 = tf.Variable(tf.random_normal([n_hidden_1,n_hidden_2], stddev = 0.03), name = 'w2')
     b2 = tf.Variable(tf.random_normal([n_hidden_2]), name = 'b2')
 
-    w3 = tf.Variable(tf.random_normal([n_hidden_2,n_out], stddev = 0.03), name = 'w3')
-    b3 = tf.Variable(tf.random_normal([n_out]), name = 'b3')
+    w3 = tf.Variable(tf.random_normal([n_hidden_2,n_hidden_3], stddev = 0.03), name = 'w3')
+    b3 = tf.Variable(tf.random_normal([n_hidden_3]), name = 'b3')
+
+    w4 = tf.Variable(tf.random_normal([n_hidden_3,n_out], stddev = 0.03), name = 'w4')
+    b4 = tf.Variable(tf.random_normal([n_out]), name = 'b4')
 
     hidden_1_out = tf.add(tf.matmul(x,w1),b1)
     hidden_1_out = tf.nn.sigmoid(hidden_1_out)
@@ -70,9 +74,12 @@ def main(_):
     hidden_2_out = tf.add(tf.matmul(hidden_1_out,w2),b2)
     hidden_2_out = tf.nn.sigmoid(hidden_2_out)
 
+    hidden_3_out = tf.add(tf.matmul(hidden_2_out,w3),b3)
+    hidden_3_out = tf.nn.sigmoid(hidden_3_out)
+
     #Define loss and optimizer
 
-    y_ = tf.nn.sigmoid(tf.add(tf.matmul(hidden_2_out, w3), b3))
+    y_ = tf.nn.sigmoid(tf.add(tf.matmul(hidden_3_out, w4), b4))
 
     cross_entropy = tf.reduce_mean(
         tf.nn.sigmoid_cross_entropy_with_logits(
