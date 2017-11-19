@@ -16,7 +16,7 @@ data_dir = os.path.join(dir_path, 'data')
 n_input = 200 # Size of a user vector
 n_hidden_1 = 250
 n_hidden_2 = 250
-n_out = 35 # number of hobbies
+n_out = 0 # number of hobbies initialized after hob is loaded
 
 batch_size = 100
 learning_rate = 0.5
@@ -31,11 +31,21 @@ def next_batch(batch_size, data, labels):
 
     return np.asarray(data_shuffled), np.asarray(labels_shuffled)
 
+def hobbyToVector(hobbies):
+    ones = []
+    for hobby in hobbies:
+        ones.append(hob.indexOf(hobby))
+    return [0 for x in range(len(hob)) if x not in ones else 1]
+
 def main(_):
     # Import data
     with open('vectorsAndLabels.json', 'r') as vl:
-        wordVectors = json.loads(vl.readline())
-        hobbies = json.loads(vl.readline())
+        wordVectors = np.asarray([np.asarray(x) for x in json.loads(vl.readline())])
+        hobbies = np.asarray([hobbyToVector(x) for x in json.loads(vl.readline())])
+    with open('hobbies.json', 'r') as hobFile:
+            hob = json.load(hobFile)
+            hob = list(sorted(hob.keys()))
+            n_out = len(hob)
 
     # Create the model
     x = tf.placeholder(tf.float32, [None, n_input])
