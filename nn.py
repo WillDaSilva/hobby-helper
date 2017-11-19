@@ -32,8 +32,9 @@ def next_batch(batch_size, data, labels):
 
 def main(_):
   # Import data
-  wordVectors = []
-  hobbies = []
+  with open('vectorsAndLabels.json', 'r') as vl:
+    wordVectors = json.loads(vl.readline())
+    hobbies = json.loads(vl.readline())
 
   # Create the model
   x = tf.placeholder(tf.float32, [None, n_input])

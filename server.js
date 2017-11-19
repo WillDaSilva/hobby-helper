@@ -60,7 +60,7 @@ wss.on('connection', function(ws) { //function runs when a new connection is ope
 								}
 								userString = userString.replace(prepRegex, ' ');
 								userString = userString.toLowerCase();
-								let commentPostRequest = http.post('localhost:5000', JSON.stringify({string : userString}),function(vectorResponse){
+								let commentPostRequest = http.post('localhost:5000', JSON.stringify({'string' : userString}),function(vectorResponse){
 									
 									let unparsedVector = '';
 									
