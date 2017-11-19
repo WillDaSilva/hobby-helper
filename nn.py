@@ -42,10 +42,13 @@ def main(_):
     with open('vectorsAndLabels.json', 'r') as vl:
         wordVectors = np.asarray([np.asarray(x) for x in json.loads(vl.readline())])
         hobbies = np.asarray([hobbyToVector(x) for x in json.loads(vl.readline())])
+
     with open('hobbies.json', 'r') as hobFile:
             hob = json.load(hobFile)
             hob = list(sorted(hob.keys()))
             n_out = len(hob)
+
+    global_step = tf.Variable(0, name='global_step', trainable=False)
 
     # Create the model
     x = tf.placeholder(tf.float32, [None, n_input])
@@ -70,21 +73,27 @@ def main(_):
 
     y_ = tf.nn.sigmoid(tf.add(tf.matmul(hidden_2_out, w3), b3))
 
-    cross_entropy = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(labels=y, logits=y_))
-    train = tf.train.GradientDescentOptimizer(learning_rate).minimize(cross_entropy)
+    cross_entropy = tf.reduce_mean(
+        tf.nn.sigmoid_cross_entropy_with_logits(
+            labels=y,
+            logits=y_
+        )
+    )
+    train = tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
+    train = train.minimize(cross_entropy, global_step=global_step)
 
     sess = tf.InteractiveSession()
     tf.global_variables_initializer().run()
+    saver = tf.train.Saver(save_relative_paths=True)
+
     # Train
     for _ in range(total_batches):
         batch_xs, batch_ys = next_batch(batch_size, wordVectors, hobbies)
         sess.run(train, feed_dict={x: batch_xs, y: batch_ys})
-
-    # # Test trained model
-    # correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
-    # accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-    # print(sess.run(accuracy, feed_dict={x: ,      # user vectors
-    #                                     y_: }))   # hobbies
+    else:
+        saver.save(sess, 'nn_model', global_step)
 
 if __name__ == '__main__':
         tf.app.run(main=main)
+
+
