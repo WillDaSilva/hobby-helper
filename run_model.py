@@ -50,14 +50,9 @@ def main(_):
     saver.restore(sess, 'nn_model.ckpt')
 
     def hobbify(vector):
-<<<<<<< HEAD
         result = list(sess.run(y_, feed_dict={x: np.asarray(vector)}))[0]
         print(result)
         
-=======
-        print(sess.run(y_, feed_dict={x: np.asarray(vector)}))
-        print(y_)
->>>>>>> c3f4cf759b8e878f7229148c830d6dcfdda1a032
     hobbify([[0.5 for x in range(200)]])
 
 if __name__ == '__main__':
